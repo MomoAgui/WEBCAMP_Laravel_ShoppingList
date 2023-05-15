@@ -19,9 +19,44 @@
     <tr>
         <th>登録日
         <th>「買うもの」名
+@foreach ($shopping_lists as $list)
+        <tr>
+            <td>{{ $list->created_at}}
+            <td>{{ $list->name }}
+@endforeach
+            <td><form action="{{ route('complete', ['user_id' => $list->id]) }}" method="post">
+            @csrf
+            <button onclick='return confirm("このタスクを「完了」にします。よろしいですか？");' >
+        完了</button></form>
+            <td><form action="{{route('dalete',['user_id'=>$list->id])}}" method="post">
+                @csrf
+                @method('DELETE')
+                <button onclick="return confirm("このタスクを削除します。よろしいですか？");">削除</button>
+            </form>
+
 
         </table>
-
+        <!-- ページネーション -->
+        {{-- {{ $shopping_lists->links() }} --}}
+       現在{{ $shopping_lists->currentPage() }}ページ目<br>
+       @if ($shopping_lists->onFirstPage() === false)
+        <a href="/shopping_list/list">最初のページ</a>
+        @else
+        最初のページ
+        @endif
+        /
+        @if ($shopping_lists->previousPageUrl() !== null)
+            <a href="{{ $shopping_lists->previousPageUrl() }}">前に戻る</a>
+        @else
+            前に戻る
+        @endif
+        /
+        @if ($shopping_lists->nextPageUrl() !== null)
+            <a href="{{ $shopping_lists->nextPageUrl() }}">次に進む</a>
+        @else
+            次に進む
+        @endif
+        <br>
         <hr>
         <a href="/logout">ログアウト</a><br>
 

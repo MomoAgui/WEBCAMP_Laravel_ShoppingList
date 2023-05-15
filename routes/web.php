@@ -21,12 +21,12 @@ use App\Http\Controllers\CompletedShoppingListController;
 
 //非ログイン画面
 Route::get('/', [AuthController::class, 'index'])->name('front.index');
-Route::post('/shopping_list/list', [AuthController::class, 'login']);
+Route::post('/login', [AuthController::class, 'login']);
 
 
 //会員登録
 Route::get('/user/register',[UserController::class,'index']);
-Route::post('/user/input',[UserController::class,'register']);
+Route::post('/user/register',[UserController::class,'register']);
 
 // 認可処理
 Route::middleware(['auth'])->group(function () {

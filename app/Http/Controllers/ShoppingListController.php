@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\ShoppingRegisterPost;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Shoppinglist as ShoppinglistModel;
-
+use Symfony\Component\HttpFoundation\StreamedResponse;
 use Illuminate\Http\Request;
 
 
@@ -31,8 +31,8 @@ class ShoppingListController extends Controller
 
         $list = ShoppinglistModel::where('user_id',Auth::id())->paginate($per_page);
 
-        //shopping_listsの情報をlistに渡す
-        return view('shopping_list.list', ['shopping_lists' => $list]);
+        //情報を$listに渡す
+        return view('shopping_list.list',['list'=>$shopping_lists]);
     }
 
  /**
