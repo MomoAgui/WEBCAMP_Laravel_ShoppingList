@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ShoppingListController;
+use App\Http\Controllers\CompletedShoppingListController;
 
 
 /*
@@ -25,14 +26,16 @@ Route::post('/shopping_list/list', [AuthController::class, 'login']);
 
 //会員登録
 Route::get('/user/register',[UserController::class,'index']);
-Route::post('/user/register',[UserController::class,'register']);
+Route::post('/user/input',[UserController::class,'register']);
 
 // 認可処理
 Route::middleware(['auth'])->group(function () {
-        Route::get('/shopping_list/list', [ShoppingListController::class, 'list']);
-    　　Route::post('/shopping_list/register',[ShoppingListController::class,'register']);
+    Route::get('/shopping_list/list', [ShoppingListController::class, 'list']);
+    //買うもの登録した時
+    Route::post('/shopping_list/list',[ShoppingListController::class,'register']);
     //
-    Route::get('/completed_tasks/list',[CompletedTaskController::class,'list'])->name('completed_list');
+    //購入済み「買うもの」一覧
+    Route::get('/completed_shopping_list/list',[CompletedShoppingListController::class,'list'])->name('completed_list');
     Route::get('/logout', [AuthController::class, 'logout']);
 });
 

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserRegisterPost;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User as UserModel;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -30,17 +31,18 @@ class UserController extends Controller
         // データの取得
 
         $datum=$request->validated();
+
         //パスワードをHashする
            $datum['password'] = Hash::make($datum['password']);
 
         // テーブルにINSERT
         try{
-
                UserModel::create($datum);
            }catch(\Throwable $e){
                echo $e->getMessage();
                exit;
            }
+            
 
 
         // ユーザー登録成功

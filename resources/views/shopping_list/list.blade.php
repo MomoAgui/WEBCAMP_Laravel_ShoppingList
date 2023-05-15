@@ -7,7 +7,7 @@
 <h1>「買うもの」登録</h1><br>
 
 
-<form action="/shopping_list/register" method="post"><br>
+<form action="/shopping_list/list" method="post"><br>
 @csrf
 「買うもの」名:<input name="name"><br>
 <button>「買うもの」を登録する</button>
@@ -19,6 +19,7 @@
     <tr>
         <th>登録日
         <th>「買うもの」名
+
         </table>
 
         <hr>

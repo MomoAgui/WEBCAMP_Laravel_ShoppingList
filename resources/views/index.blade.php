@@ -16,7 +16,7 @@
         @endif
         <form action="/shopping_list/list" method="post">
             @csrf
-            email：<input name="email" value="{{ old('email') }}"><br>
+            email：<input name="email"><br>
             パスワード：<input  name="password" type="password"><br>
             <button>ログインする</button>
         </form>

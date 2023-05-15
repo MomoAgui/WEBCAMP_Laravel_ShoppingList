@@ -15,7 +15,7 @@
         <form action="/user/input" method="post">
             @csrf
         名前：<input name="name"><br>
-        email:<input name="email" type="email"><br>
+        email:<input name="email" type="email" value="{{ old('email')}}"><br>
         パスワード：<input name="password" type="password" ><br>
         パスワード（再度）:<input name="password" type="password"><br>
 
