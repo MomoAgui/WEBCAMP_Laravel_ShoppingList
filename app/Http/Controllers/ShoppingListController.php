@@ -101,7 +101,7 @@ class ShoppingListController extends Controller
    /**
      * 削除処理
      */
-    public function delete(Request $request, $shopping_list_id,$template_name)
+    public function delete(Request $request, $shopping_list_id)
     {
         //shopping_list_idのレコードを取得する
         $list= ShoppinglistModel::where('user_id',Auth::id());
@@ -113,17 +113,12 @@ class ShoppingListController extends Controller
         if ($list === null) {
             return redirect('/shopping_list/list');
         }
-         // テンプレートに「取得したレコード」の情報を渡す
-        return view($template_name, ['shopping_lists' => $list]);
-
-
-
+        
         if ($list !== null) {
             $list->delete();
-
+        
         }
-
-
+        
          $request->session()->flash('front.list_delete_success', true);
 
 
@@ -141,7 +136,8 @@ class ShoppingListController extends Controller
             DB::beginTransaction();
 
             // shopping_list_idのレコードを取得する
-            $list = $this->getShoppinglistModel($shopping_list_id);
+             $list= CompletedShoppingListModel::where('user_id',Auth::id());
+
             if ($list === null) {
                 // shopping_list_idが不正なのでトランザクション終了
                 throw new \Exception('');
@@ -155,8 +151,8 @@ class ShoppingListController extends Controller
             $dask_datum = $list->toArray();
             unset($dask_datum['created_at']);
             unset($dask_datum['updated_at']);
-            $r = CompletedShoppingListModel::create($dask_datum);
-            if ($r === null) {
+            CompletedShoppingListModel::create($dask_datum);
+            if ($list === null) {
                 // insertで失敗したのでトランザクション終了
                 throw new \Exception('');
             }
@@ -173,8 +169,6 @@ class ShoppingListController extends Controller
         // 一覧に遷移する
         return redirect('/shopping_list/list');
     }
-
-
 
 
 }

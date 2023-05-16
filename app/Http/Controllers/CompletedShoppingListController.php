@@ -16,7 +16,7 @@ class CompletedShoppingListController extends Controller
      *
      * @return \Illuminate\View\View
      */
-    public function list()      /** $task_idの時のみ引数()に入れる**/
+    public function list()
 
     {
         $list=CompletedShoppingListModel::get();  /**完了したテーブル全レコードを取得**/
@@ -28,41 +28,9 @@ class CompletedShoppingListController extends Controller
         $list =CompletedShoppingListModel::where('user_id',Auth::id())->paginate($per_page);
 
 
-        return view('completed_shopping_list.list',['list'=>$completed_shopping_lists]);  /**Complted_tasksの情報をlistに渡す**/
-
-    }
-    /**
-     * 「単一のタスク」Modelの取得
-     */
-    protected function getCompletedTaskModel($list_id)
-    {
-        // list_idのレコードを取得する
-        $list = CompetedTaskModel::find($list_id);
-        if ($list === null) {
-            return null;
-        }
-        // 本人以外のタスクならNGとする
-        if ($list->user_id !== Auth::id()) {
-            return null;
-        }
-        //
-        return $list;
+        return view('completed_shopping_list.list',['completed_shopping_lists'=>$list]);
     }
 
-    /**
-     * 「単一のタスク」の表示
-     */
-    protected function singleListRender($list_id, $template_name)
-    {
-        // list_idのレコードを取得する
-        $list = $this->getCompletedShoppingListModel($list_id);
-        if ($list === null) {
-            return redirect('/completed_shopping_list/list');
-        }
-
-        // テンプレートに「取得したレコード」の情報を渡す
-        return view($template_name, ['completed_shopping_lists' => $list]);
-    }
 
 
 

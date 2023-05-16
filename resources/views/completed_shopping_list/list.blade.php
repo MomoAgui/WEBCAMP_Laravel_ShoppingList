@@ -12,7 +12,7 @@
     <tr>
         <th>「買うもの」名
         <th>購入日
-         @foreach ($copmleted_shopping_lists as $list)
+         @foreach ($completed_shopping_lists as $list)
         <tr>
             <td>{{ $list->name}}
             <td>{{ $list->created_at }}
