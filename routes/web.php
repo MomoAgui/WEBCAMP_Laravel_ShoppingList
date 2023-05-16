@@ -7,6 +7,8 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\ShoppingListController;
 use App\Http\Controllers\CompletedShoppingListController;
 
+use App\Http\Controllers\admin\AdminAuthController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -30,12 +32,14 @@ Route::post('/user/register',[UserController::class,'register']);
 
 // 認可処理
 Route::middleware(['auth'])->group(function () {
-    Route::get('/shopping_list/list', [ShoppingListController::class, 'list']);
-    //買うもの登録した時
-    Route::post('/shopping_list/list',[ShoppingListController::class,'register']);
-    //
+    Route::prefix('/shopping_list')->group(function () {
+    Route::get('/list', [ShoppingListController::class, 'list']);
+    Route::post('/list',[ShoppingListController::class,'register']);
+    Route::delete('/delete/{shopping_list_id}', [ShoppingListController::class, 'delete'])->whereNumber('shopping_list_id')->name('delete');
+    Route::post('/complete/{shopping_list_id}', [ShoppingListController::class, 'complete'])->whereNumber('shopping_list_id')->name('complete');
+});
     //購入済み「買うもの」一覧
-    Route::get('/completed_shopping_list/list',[CompletedShoppingListController::class,'list'])->name('completed_list');
+    Route::get('/completed_shopping_list/list',[CompletedShoppingListController::class,'list']);
     Route::get('/logout', [AuthController::class, 'logout']);
 });
 

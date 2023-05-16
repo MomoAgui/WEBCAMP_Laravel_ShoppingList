@@ -14,6 +14,7 @@ class CreateShoppinglistsTable extends Migration
     public function up()
     {
         Schema::create('shopping_lists', function (Blueprint $table) {
+            $table->id();
             $table->unsignedInteger('id');
             $table->string('name', 255)->comment('商品名');
             $table->unsignedBigInteger('user_id')->comment('このタスクの所有者');

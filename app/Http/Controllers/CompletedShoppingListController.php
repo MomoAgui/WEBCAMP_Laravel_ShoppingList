@@ -28,7 +28,7 @@ class CompletedShoppingListController extends Controller
         $list =CompletedShoppingListModel::where('user_id',Auth::id())->paginate($per_page);
 
 
-        return view('completed_shopping_list.list',['completed_shopping_lists'=>$list]);  /**Complted_tasksの情報をlistに渡す**/
+        return view('completed_shopping_list.list',['list'=>$completed_shopping_lists]);  /**Complted_tasksの情報をlistに渡す**/
 
     }
     /**

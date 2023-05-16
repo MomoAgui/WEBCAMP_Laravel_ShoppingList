@@ -26,15 +26,14 @@ class AuthController extends Controller
     public function login(LoginPostRequest $request)
     {
         $datum=$request->validated();
-        return view('/shopping_list/list',['datum'=>$datum]);
 
         if(Auth::attempt($datum)===false){
             return back()
             ->withInput()
             ->withErrors(['auth'=>'emailかパスワードに誤りがあります'],);
         }
-        $request->sesstion()->regenerate();
-        return redirect()->intendes('/shopping_list/list');
+        $request->session()->regenerate();
+        return redirect()->intended('/shopping_list/list');
 
 }
     /**
