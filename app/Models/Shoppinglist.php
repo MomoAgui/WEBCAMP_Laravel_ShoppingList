@@ -13,12 +13,12 @@ class Shoppinglist extends Model
         'email',
         'password',
         'user_id',
-        'shopping_list_id',
+        'shopping_list_id'
     ];
      /**
      * 複数代入不可能な属性
      */
-    protected $guarded = ['id'];
+    protected $guarded = [];
 
     /**紐づけテーブル**/
 

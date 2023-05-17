@@ -50,14 +50,12 @@ class ShoppingListController extends Controller
          $datum['user_id'] = Auth::id();
 
         // テーブルへのINSERT
-        try {
-             ShoppinglistModel::create($datum);
-        } catch(\Throwable $e) {
-            // XXX 本当はログに書く等の処理をする。今回は一端「出力する」だけ
-            echo $e->getMessage();
-            exit;
+        try{
+               ShoppinglistModel::create($datum);
+           }catch(\Throwable $e){
+               echo $e->getMessage();
+               exit;
         }
-
 
 
         // 「買うもの」登録成功
@@ -130,14 +128,18 @@ class ShoppingListController extends Controller
      */
     public function complete(Request $request,$shopping_list_id)
     {
+        
+         // shopping_list_idのレコードを取得する
+             $list= ShoppinglistModel::where('user_id',Auth::id());
+              $list = $this->getShoppinglistModel($shopping_list_id);
+
+
         /* タスクを完了テーブルに移動させる */
         try {
             // トランザクション開始
             DB::beginTransaction();
 
-            // shopping_list_idのレコードを取得する
-             $list= CompletedShoppingListModel::where('user_id',Auth::id());
-
+           
             if ($list === null) {
                 // shopping_list_idが不正なのでトランザクション終了
                 throw new \Exception('');
@@ -164,11 +166,14 @@ class ShoppingListController extends Controller
 
             // トランザクション異常終了
             DB::rollBack();
+            
+              echo $e->getMessage();
+               exit;
+
         }
 
         // 一覧に遷移する
         return redirect('/shopping_list/list');
-    }
-
-
+        
+}
 }

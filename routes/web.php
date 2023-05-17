@@ -46,8 +46,8 @@ Route::middleware(['auth'])->group(function () {
 
 // 管理画面
 Route::prefix('/admin')->group(function () {
-    Route::get('', [AdminAuthController::class, 'index'])->name('admin.index');
-    Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login');
+    Route::get('', [AdminAuthController::class,'index'])->name('admin.index');
+    Route::post('/login', [AdminAuthController::class,'login'])->name('admin.login');
     Route::middleware(['auth:admin'])->group(function () {
         Route::get('/top', [AdminHomeController::class, 'top'])->name('admin.top');
         Route::get('/user/list', [AdminUserController::class, 'list'])->name('admin.user.list');
