@@ -13,7 +13,9 @@ class Shoppinglist extends Model
         'email',
         'password',
         'user_id',
-        'shopping_list_id'
+        'created_at',
+        'updated_at',
+        'shopping_list_id',
     ];
      /**
      * 複数代入不可能な属性
@@ -23,6 +25,11 @@ class Shoppinglist extends Model
     /**紐づけテーブル**/
 
     protected $table='shopping_lists';
+
+   protected $list=[
+    'created_at',
+    'updated_at'];
+
 
 
 }

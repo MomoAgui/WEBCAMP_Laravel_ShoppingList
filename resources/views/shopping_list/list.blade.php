@@ -1,17 +1,18 @@
 @extends('layout')
 
+
+
+
 @section('contets')
-
-<h1>「買うもの」登録</h1><br>
-
+<h1>「買うもの」の登録</h1>
 @if (session('front.shopping_list_list_success') == true)
-                「買うもの」を登録しました！！<br>
+                「買うもの」を登録しました！！
             @endif
              @if (session('front.list_delete_success') == true)
-                リストから削除しました！！<br>
+                「買うもの」を削除しました！！
             @endif
              @if (session('front.list_completed_success') == true)
-                購入済みにしました！！<br>
+                「買うもの」を完了にしました！！
             @endif
 @if ($errors->any())
             <div>
@@ -20,7 +21,7 @@
             @endforeach
             </div>
         @endif
-<form action="/shopping_list/list" method="post"><br>
+<form action="/shopping_list/list" method="post">
 @csrf
 「買うもの」名:<input name="name"　value="{{old('name')}}"><br>
 <button>「買うもの」を登録する</button>
@@ -35,14 +36,15 @@
 <table border="1">
     <tr>
         <th>登録日
-        <th>「買うもの」名
+        <th>「買うもの名」
 @foreach ($shopping_lists as $list)
         <tr>
-            <td>{{ $list->created_at}}
+            <td>{{$list->created_at->format(config('const.format.date')) }}
             <td>{{ $list->name }}
             <td><form action="{{ route('complete',['shopping_list_id'=>$list->id]) }}" method="post">
              @csrf
             <button onclick='return confirm("このタスクを「完了」にします。よろしいですか？");' >完了</button></form>
+            <td>　<br>
             <td><form action="{{route('delete',['shopping_list_id'=>$list->id])}}" method="post">
                 @csrf
                 @method('DELETE')

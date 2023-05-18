@@ -18,7 +18,9 @@ class CompletedShoppingList extends Model
     protected $fillable = [
         'name',
         'user_id',
-        'id', 
+        'id',
+        'created_at',
+        'updated_at'
 
         ];
 
@@ -26,6 +28,11 @@ class CompletedShoppingList extends Model
     /**紐づけテーブル**/
 
     protected $table='completed_shopping_lists';
+
+     protected $list=[
+    'created_at',
+    'updated_at'];
+
 
 
 }

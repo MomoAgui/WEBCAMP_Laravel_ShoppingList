@@ -10,6 +10,7 @@ use App\Models\Shoppinglist as ShoppinglistModel;
 use App\Models\CompletedShoppingList as CompletedShoppingListModel;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 
 
 class ShoppingListController extends Controller
@@ -32,7 +33,10 @@ class ShoppingListController extends Controller
         $per_page = 3;
 
         $list = ShoppinglistModel::where('user_id',Auth::id())->paginate($per_page);
-
+        
+        
+        
+            
         return view('shopping_list.list',['shopping_lists'=>$list]);
     }
 
@@ -176,4 +180,5 @@ class ShoppingListController extends Controller
         return redirect('/shopping_list/list');
         
 }
+
 }

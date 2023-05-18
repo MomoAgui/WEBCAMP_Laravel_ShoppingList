@@ -15,7 +15,7 @@
          @foreach ($completed_shopping_lists as $list)
         <tr>
             <td>{{ $list->name}}
-            <td>{{ $list->created_at }}
+           <td>{{$list->created_at->format(config('const.format.date')) }}
 
 @endforeach
 
