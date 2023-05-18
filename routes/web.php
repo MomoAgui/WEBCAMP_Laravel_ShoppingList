@@ -8,6 +8,8 @@ use App\Http\Controllers\ShoppingListController;
 use App\Http\Controllers\CompletedShoppingListController;
 
 use App\Http\Controllers\admin\AdminAuthController;
+use App\Http\Controllers\admin\AdminHomeController;
+use App\Http\Controllers\admin\AdminUserController;
 
 
 /*
@@ -48,6 +50,7 @@ Route::middleware(['auth'])->group(function () {
 Route::prefix('/admin')->group(function () {
     Route::get('', [AdminAuthController::class,'index'])->name('admin.index');
     Route::post('/login', [AdminAuthController::class,'login'])->name('admin.login');
+    
     Route::middleware(['auth:admin'])->group(function () {
         Route::get('/top', [AdminHomeController::class, 'top'])->name('admin.top');
         Route::get('/user/list', [AdminUserController::class, 'list'])->name('admin.user.list');
