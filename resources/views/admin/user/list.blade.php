@@ -16,9 +16,9 @@
                 <th>購入した「買うもの」の数
         @foreach($users as $user)
             <tr>
-                <th>{{ $user->id }}
-                <th>{{ $user->name }}
-                <th>{{ $user->shopping_lists_num }}
+                <td>{{ $user->id }}
+                <td>{{ $user->name }}
+                <td>{{ $user->shopping_lists_num }}
         @endforeach
            </table>
  @endsection

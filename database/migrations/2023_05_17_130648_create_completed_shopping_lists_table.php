@@ -14,10 +14,11 @@ class CreateCompletedShoppingListsTable extends Migration
     public function up()
     {
         Schema::create('completed_shopping_lists', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedInteger('id');
             $table->string('name', 255)->comment('商品名');
             $table->unsignedBigInteger('user_id')->comment('このタスクの所有者');
             $table->foreign('user_id')->references('id')->on('users'); // 外部キー制約
+            
             //$table->timestamps();
             $table->dateTime('created_at')->useCurrent()->comment('購入日');
             $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate();

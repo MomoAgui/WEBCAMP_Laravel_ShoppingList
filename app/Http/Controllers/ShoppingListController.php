@@ -32,7 +32,9 @@ class ShoppingListController extends Controller
          // 1Page辺りの表示アイテム数を設定
         $per_page = 3;
 
-        $list = ShoppinglistModel::where('user_id',Auth::id())->paginate($per_page);
+        $list = ShoppinglistModel::where('user_id',Auth::id())
+        ->orderBy('name')
+        ->paginate($per_page);
         
         
         

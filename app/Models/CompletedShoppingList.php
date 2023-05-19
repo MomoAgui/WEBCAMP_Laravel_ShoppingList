@@ -13,15 +13,15 @@ class CompletedShoppingList extends Model
      /**
      * 複数代入不可能な属性
      */
-    protected $guarded = ['id'];
+    protected $guarded = [];
 
     protected $fillable = [
         'name',
         'user_id',
         'id',
         'created_at',
-        'updated_at'
-
+        'updated_at',
+        'completed_shopping_list_id'
         ];
 
 
