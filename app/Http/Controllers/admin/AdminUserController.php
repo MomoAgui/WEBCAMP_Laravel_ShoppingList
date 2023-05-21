@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\User as UserModel;
+use Illuminate\Support\Facades\DB;
 
 class AdminUserController extends Controller
 {
@@ -14,12 +15,12 @@ class AdminUserController extends Controller
      */
      public function list()
     {
-        $group_by_column = ['users.id', 'users.name'];
+          
+        $group_by_column = ['users.id', 'users.name','completed_shopping_lists.name'];
         $list = UserModel::select($group_by_column)
-                         ->selectRaw('count(shopping_lists.id) AS shopping_lists_num')
+                         ->selectRaw('count(completed_shopping_lists.name) AS completed_shopping_list_num')
                          ->leftJoin('shopping_lists', 'users.id', '=', 'shopping_lists.user_id')
                          ->groupBy($group_by_column)
-                         ->orderBy('users.id')
                          ->get();
 
         return view('admin.user.list', ['users' => $list]);

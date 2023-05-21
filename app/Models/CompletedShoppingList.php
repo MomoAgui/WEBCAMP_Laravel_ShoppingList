@@ -21,7 +21,6 @@ class CompletedShoppingList extends Model
         'id',
         'created_at',
         'updated_at',
-        'completed_shopping_list_id'
         ];
 
 

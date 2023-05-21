@@ -16,6 +16,7 @@ class Shoppinglist extends Model
         'created_at',
         'updated_at',
         'shopping_list_id',
+        'completed_shopping_list_id'
     ];
      /**
      * 複数代入不可能な属性

@@ -22,6 +22,7 @@ class CreateCompletedShoppingListsTable extends Migration
             //$table->timestamps();
             $table->dateTime('created_at')->useCurrent()->comment('購入日');
             $table->dateTime('updated_at')->useCurrent()->useCurrentOnUpdate();
+            
             //
             $table->primary('id');
         });
