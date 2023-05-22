@@ -15,11 +15,11 @@ class AdminUserController extends Controller
      */
      public function list()
     {
-          
-        $group_by_column = ['users.id', 'users.name','completed_shopping_lists.name'];
+
+        $group_by_column = ['users.id', 'users.name'];
         $list = UserModel::select($group_by_column)
                          ->selectRaw('count(completed_shopping_lists.name) AS completed_shopping_list_num')
-                         ->leftJoin('shopping_lists', 'users.id', '=', 'shopping_lists.user_id')
+                         ->leftJoin('completed_shopping_lists', 'users.id', '=', 'completed_shopping_lists.user_id')
                          ->groupBy($group_by_column)
                          ->get();
 
